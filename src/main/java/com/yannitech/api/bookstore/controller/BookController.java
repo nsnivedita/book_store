@@ -1,10 +1,9 @@
 package com.yannitech.api.bookstore.controller;
 
-import com.yannitech.api.bookstore.dao.domain.BookStore;
+import com.yannitech.api.bookstore.model.BookDetail;
 import com.yannitech.api.bookstore.dao.entity.Author;
 import com.yannitech.api.bookstore.dao.entity.Book;
-import com.yannitech.api.bookstore.dao.entity.Category;
-import com.yannitech.api.bookstore.dao.service.BookService;
+import com.yannitech.api.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,11 +28,11 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping(value = "/book",  produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/books",  produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     List<Book> viewAllBook(){
-        return bookService.getBooks();
+        return bookService.getAllBook();
     }
 
     @PostMapping (value = "/saveBook",  produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -43,6 +42,13 @@ public class BookController {
         return bookService.addBook(book);
     }
 
+    @GetMapping(value = "/authors",  produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    List<Author> getAuthors(){
+        return bookService.getAllAuthor();
+    }
+
     @PostMapping (value = "/saveAuthor",  produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
@@ -50,32 +56,27 @@ public class BookController {
         return bookService.addAuthor(authors);
     }
 
-    @PostMapping (value = "/saveCategory",  produces = { MediaType.APPLICATION_JSON_VALUE })
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public Category saveCategory(@RequestBody Category categories){
-        return bookService.addCategory(categories);
-    }
-
+    /*
     @GetMapping(value = "/book/{id}",  produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public Book getBookById(@PathVariable("id") Long id){
         return bookService.getBooksById(id);
     }
-
+*/
     @GetMapping(value = "/bookStore",  produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public List<BookStore> getAllBook(){
-        return bookService.getAllBooks();
+    public List<BookDetail> getAllBook(){
+        return bookService.getBookDetails();
     }
 
+    /*
     @GetMapping(value = "/book/{title}",  produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public String getBookByName(String title){
         return bookService.getBook(title);
     }
-
+*/
 }

@@ -14,10 +14,12 @@ public class Book {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq")
     private Long id;
+    private String category;
     private String title;
+    private String language;
     private String year;
     private Float price;
-    private Long categoryId;
+
   //  private Long authorId;
 
 }

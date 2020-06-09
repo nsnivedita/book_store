@@ -1,5 +1,6 @@
 package com.yannitech.api.bookstore.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,9 +13,12 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq2")
-    private Long authorId;
-    private String authorName;
-    private String bookId;
+    @JsonIgnore
+    private Long id;
 
+    @JsonIgnore
+    private Long bookId;
+
+    private String authorName;
 
 }

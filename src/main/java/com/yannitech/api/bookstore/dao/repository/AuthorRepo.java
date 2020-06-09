@@ -11,8 +11,8 @@ import java.util.List;
 public interface AuthorRepo extends JpaRepository<Author, Long>{
    /* String findBookByAuthor(String authorName);*/
 
-    Author findByAuthorId(Long s);
+    //Author findByAuthorId(Long s);
 
-    @Query(value = "select authorName from Author where bookId = ?1")
-    List<Author> findByBookId(Long id);
+   @Query(value = "select a from Author a where a.bookId = ?1")
+   List<Author> findByBookId(Long bookId);
 }
